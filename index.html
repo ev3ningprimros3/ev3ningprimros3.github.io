@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="is-loading">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,13 +23,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- Start the hero world's files with the page instead of after the JS (three.js fetches them the same
+         way, so these are reused, not downloaded twice). Keep in sync with src/loader.ts. -->
     <link rel="preload" href="/models/hero.gltf" as="fetch" type="model/gltf+json" crossorigin />
     <link rel="preload" href="/models/hero.bin" as="fetch" crossorigin />
-    <script type="module" crossorigin src="/assets/main-Hjp_8Vk9.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/global-BDyqkdgs.js">
-    <link rel="stylesheet" crossorigin href="/assets/global-DEE8KISc.css">
+    <link rel="preload" href="/models/tex/M_island_main.webp" as="fetch" crossorigin />
+    <link rel="preload" href="/models/tex/M_adventurer.webp" as="fetch" crossorigin />
+    <link rel="preload" href="/models/tex/M_kit_props.webp" as="fetch" crossorigin />
+    <link rel="preload" href="/models/tex/M_portal.webp" as="fetch" crossorigin />
+    <link rel="preload" href="/models/tex/M_tree.webp" as="fetch" crossorigin />
+    <style>html.is-loading{overflow:hidden}.loader{z-index:100;text-align:center;color:#fff;background:radial-gradient(circle at 50% 35%,#3d8ff0,#1b3f9e 60%,#151933);place-content:center;justify-items:center;gap:18px;padding:24px;font:800 1rem/1.4 Nunito,system-ui,sans-serif;transition:opacity .6s,visibility .6s;display:grid;position:fixed;inset:0}.loader.is-done{opacity:0;visibility:hidden}.loader-logo{filter:drop-shadow(0 6px 14px #00000059);width:min(220px,50vw);height:auto;animation:2.4s ease-in-out infinite loader-bob}.loader-bar{background:#ffffff2e;border-radius:99px;width:min(320px,70vw);height:14px;overflow:hidden;box-shadow:inset 0 2px 4px #0000004d}.loader-fill{width:calc(var(--p,0) * 100%);border-radius:inherit;background:linear-gradient(#ffe27a,#ffbf2e 55%,#f6a400);height:100%;transition:width .4s}.loader-text{margin:0}.loader-skip{color:#fff;font:inherit;cursor:pointer;background:0 0;border:2px solid #ffffff73;border-radius:99px;padding:8px 18px}.loader-skip:hover{background:#ffffff1f}@keyframes loader-bob{50%{transform:translateY(-8px)}}@media (prefers-reduced-motion:reduce){.loader-logo{animation:none}.loader-fill{transition:none}}</style>
+    <noscript><style>.loader{display:none}html.is-loading{overflow:auto}</style></noscript>
+    <script>
+      // Safety net: never keep visitors behind the loading screen for more than 30 s, even if a script fails.
+      setTimeout(function () {
+        var l = document.getElementById('loader'), r = document.getElementById('root');
+        if (l) l.classList.add('is-done');
+        if (r) r.removeAttribute('inert');
+        document.documentElement.classList.remove('is-loading');
+      }, 30000);
+    </script>
+    <script type="module" crossorigin src="/assets/main-Bx88bd8k.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/global-DW2HCYTG.js">
+    <link rel="stylesheet" crossorigin href="/assets/global-CrlguEd7.css">
   </head>
   <body>
+    <div id="loader" class="loader" role="status" aria-live="polite">
+      <img class="loader-logo" src="/assets/stride-three-logo-B1dKzVo0.webp" alt="Stride Three Studios" width="480" height="410" />
+      <div class="loader-bar" aria-hidden="true"><div class="loader-fill"></div></div>
+      <p class="loader-text">Entering our world… <span class="loader-pct">0%</span></p>
+      <button class="loader-skip" type="button" hidden>Skip intro</button>
+    </div>
     <div id="root"></div>
   </body>
 </html>

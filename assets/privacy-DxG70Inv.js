@@ -1,1 +1,0 @@
-import"./global-BDyqkdgs.js";for(let e of document.querySelectorAll(`[data-year]`))e.textContent=String(new Date().getFullYear());
